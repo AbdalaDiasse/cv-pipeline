@@ -1,6 +1,6 @@
-# DeepVisionStream: Scalable DeepStream-Based CV Framework
+# SmartRetail: Scalable DeepStream-Based CV Framework
 
-**DeepVisionStream** is a modular, scalable, and production-ready computer vision framework based on NVIDIA DeepStream. It is designed for edge (Jetson) and server (dGPU) deployments, supporting multi-camera management, real-time inference, analytics modules, Kafka/Redis messaging, API control, and monitoring.
+**SmartRetail** is a modular, scalable, and production-ready computer vision framework based on NVIDIA DeepStream. It is designed for edge (Jetson) and server (dGPU) deployments, supporting multi-camera management, real-time inference, analytics modules, Kafka/Redis messaging, API control, and monitoring.
 
 ## 🚀 Features
 
@@ -24,6 +24,64 @@
 ├── docs/               # Architecture diagrams, setup guides
 ├── tests/              # Unit/integration tests
 └── README.md
+```
+
+## 📁 Project Structure V2
+
+```
+deepvisionstream/
+├── apps/                     # Analytics modules (custom per project)
+│   ├── object_counting/      # Object counting logic
+│   ├── intrusion_detection/  # Intrusion or zone violation logic
+│   ├── ppe_compliance/       # PPE detection logic
+│   └── __init__.py           # Analytics module registry
+│
+├── core/                     # Core framework components
+│   ├── pipeline/             # DeepStream pipeline builder/wrappers
+│   ├── camera_manager.py     # Camera source registry & lifecycle
+│   ├── model_manager.py      # Load and manage inference models
+│   ├── broker/               # Kafka/Redis integration
+│   ├── scheduler.py          # Stream scheduling & orchestration
+│   └── utils/                # Common utilities (logging, time, config)
+│
+├── api/                      # REST API for control & monitoring
+│   ├── main.py               # FastAPI entry point
+│   ├── routers/              # Endpoint routers (health, config, stream control)
+│   └── schemas/              # Pydantic schemas for request/response models
+│
+├── configs/                  # Configurations for deployment & runtime
+│   ├── cameras.yaml          # RTSP streams, camera metadata
+│   ├── models.yaml           # Model paths, labels, inference params
+│   ├── zones.yaml            # Zone definitions for analytics
+│   └── app.yaml              # General app settings
+│
+├── deploy/                   # Deployment tooling
+│   ├── docker/               # Dockerfiles and build scripts
+│   ├── docker-compose.yaml   # Local dev setup
+│   ├── jetson/               # Jetson device setup scripts
+│   ├── k8s/                  # Kubernetes manifests for prod deployment
+│   └── systemd/              # Systemd service configs (for bare-metal)
+│
+├── monitoring/               # Observability stack
+│   ├── prometheus/           # Prometheus config files
+│   ├── grafana/              # Dashboards for system metrics
+│   └── exporters/            # Custom metrics/log exporters (e.g., GPU, DeepStream)
+│
+├── docs/                     # Documentation & diagrams
+│   ├── architecture.md       # System architecture and components
+│   ├── setup_guide.md        # Installation and usage instructions
+│   ├── integration.md        # External service integration (e.g., Kafka)
+│   └── diagrams/             # Visual diagrams (plantUML, draw.io, etc.)
+│
+├── tests/                    # Unit and integration tests
+│   ├── test_apps/            # Test cases for analytics modules
+│   ├── test_api/             # Test cases for API routes
+│   ├── test_core/            # Test pipeline, manager, brokers
+│   └── conftest.py           # Pytest configuration
+│
+├── requirements.txt          # Python dependencies (for API/management components)
+├── Makefile                  # Common dev/build commands
+└── README.md                 # Overview, features, and quickstart
 ```
 
 ## 🧪 Prebuilt Applications
